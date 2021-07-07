@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tatsonlambda.vocabjotdown.data.StudyMapper">
+
+    <select id="getProfileByUserId" resultType="com.tatsonlambda.vocabjotdown.entity.Profile">
+        SELECT * FROM profile WHERE user_id=#{userId}
+    </select>
+
+    <select id="getProfileByUserIdAndLanguage" resultType="com.tatsonlambda.vocabjotdown.entity.Profile">
+        SELECT * FROM profile a inner join language b on (a.language_id = b.id) WHERE a.user_id=#{userId} and b.code = #{code}
+    </select>
+
+    <select id="getProfileByUserIdAndLanguageCode" resultType="com.tatsonlambda.vocabjotdown.entity.Profile">
+        SELECT * FROM profile a inner join language b on (a.language_id = b.id) WHERE a.user_id=#{userId} and b.code = #{code}
+    </select>
+
+    <select id="getProfile" resultType="com.tatsonlambda.vocabjotdown.entity.Profile">
+        SELECT * FROM profile WHERE id=#{profileId}
+    </select>
+
+    <update id="updateProfile">
+        UPDATE profile SET level = #{level}, status = #{status}, last_update_time = now() WHERE id = #{id}
+    </update>
+
+    <insert id="createProfile" parameterType="com.tatsonlambda.vocabjotdown.entity.Profile"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO profile (user_id, language_id, level, status, last_update_time) VALUES (#{userId}, #{languageId}, #{level}, #{status}, now())
+    </insert>
+
+    <select id="getVocabularyByProfileIdAndProgress" resultType="com.tatsonlambda.vocabjotdown.entity.Vocabulary">
+        SELECT a.* FROM vocabulary a INNER JOIN profile b ON (a.profile_id = b.id)
+        WHERE b.id = #{profileId} and progress in
+        <foreach collection="progressList" item="progress" separator="," open="(" close=")">
+            #{progress}
+        </foreach>
+    </select>
+
+    <insert id="addVocabulary" parameterType="com.tatsonlambda.vocabjotdown.entity.Vocabulary">
+        INSERT INTO vocabulary (profile_id, word, progress, last_update_time) VALUES (#{profileId}, #{word}, #{progress}, now())
+    </insert>
+
+    <update id="updateVocabulary">
+        UPDATE vocabulary SET progress=#{progress}, last_update_time =now() WHERE id=#{id}
+    </update>
+
+    <delete id="deleteVocabulary">
+        DELETE FROM vocabulary WHERE id=#{id}
+    </delete>
+
+    <select id="getArticleById" resultType="com.tatsonlambda.vocabjotdown.entity.Article">
+        SELECT a.id, a.profile_id, a.title, a.content, a.status, a.create_time, a.last_update_time
+        FROM article a WHERE id = #{articleId}
+    </select>
+
+    <select id="getArticlesById" resultType="com.tatsonlambda.vocabjotdown.entity.Article">
+        SELECT a.id, a.profile_id, a.title,
+        <choose>
+            <when test="textLimit &lt;= 0" >
+                a.content,
+            </when>
+            <otherwise>
+                substring(a.content, 1, #{textLimit}) as content,
+            </otherwise>
+        </choose>
+        a.status, a.create_time, a.last_update_time
+        FROM article a WHERE a.id IN
+        <foreach collection="articleIdList" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getArticlesByProfileId" resultType="com.tatsonlambda.vocabjotdown.entity.Article">
+        SELECT a.id, a.profile_id, a.title,
+        <choose>
+            <when test="textLimit &lt;= 0" >
+                a.content,
+            </when>
+            <otherwise>
+                substring(a.content, 1, #{textLimit}) as content,
+            </otherwise>
+        </choose>
+        a.status, a.create_time, a.last_update_time
+        from article a where profile_id=#{profileId}
+    </select>
+
+    <delete id="deleteArticleById">
+        DELETE FROM article WHERE article_id=#{articleId}
+    </delete>
+
+    <insert id="createArticle" parameterType="com.tatsonlambda.vocabjotdown.entity.Article"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO article (profile_id, title, content, create_time, last_update_time, status) VALUES (#{profileId}, #{title}, #{content}, now(), now(), #{status})
+    </insert>
+
+    <update id="updateArticle">
+        update article set profile_id=#{profileId}, title=#{title}, content=#{content}, status=#{status}, create_time=#{createTime}, last_update_time = now() where id=#{id}
+    </update>
+
+    <select id="getFlashCardDeckByProfileId" resultType="com.tatsonlambda.vocabjotdown.entity.FlashCardDeck">
+        SELECT * FROM flashcarddeck WHERE deck_id = #{deckId}
+    </select>
+
+    <select id="getFlashCardByProfileId" resultType="com.tatsonlambda.vocabjotdown.entity.FlashCardDeck">
+        select * from flashcarddeck a where profile_id=#{profileId}
+    </select>
+
+    <insert id="createFlashCardDeck" parameterType="com.tatsonlambda.vocabjotdown.entity.FlashCardDeck"
+            useGeneratedKeys="true" keyProperty="deckId">
+        insert into flashcarddeck (profile_id, create_time, last_update_time, status) values (#{profileId}, now(), now(), 'A')
+    </insert>
+
+    <update id="updateFlashCardDeck">
+        update flashcarddeck set update_date = now(), status=#{status} where id = #{deckId}
+    </update>
+
+    <delete id="deleteFlashCardDeck">
+        delete from flashcard where deck id = #{deckId}
+    </delete>
+
+    <select id="getFlashCardByDeckId" resultType="com.tatsonlambda.vocabjotdown.entity.FlashCard">
+        select * from flashcard a where deck_id=#{deckId}
+    </select>
+
+    <insert id="createFlashCard" parameterType="com.tatsonlambda.vocabjotdown.entity.FlashCard"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into flashcard (deck_id, last_study, response, create_time, last_update_time status) values (#{deckId}, now(), null, now(), now(), 'A')
+    </insert>
+
+    <update id="updateFlashCard">
+        update flashcard set deck_id = #{deckId}, last_study = #{lastStudy}, response = #{response}, status = #{status}, last_update_time = now() where flash_card_id = #{deckId}
+    </update>
+
+    <delete id="deleteFlashCard">
+        delete from flashcard where id = #{cardId}
+    </delete>
+
+    <select id="getLanguageList" resultType="com.tatsonlambda.vocabjotdown.entity.Language">
+        select * from language
+    </select>
+
+    <select id="getLanguageByCode" resultType="com.tatsonlambda.vocabjotdown.entity.Language">
+        select * from language where code=#{code}
+    </select>
+
+    <select id="getResourceByLanguageId" resultType="com.tatsonlambda.vocabjotdown.entity.Resource">
+        select * from resource where language_id = #{langId}
+    </select>
+
+    <select id="getResourceByLanguageCode" resultType="com.tatsonlambda.vocabjotdown.entity.Resource">
+        select * from resource a left join language b on (a.language_id=b.id) where b.code = #{code}
+    </select>
+
+    <select id="getResourceByResourceId" resultType="com.tatsonlambda.vocabjotdown.entity.Resource">
+        select * from resource where id = #{resourceId}
+    </select>
+
+    <select id="getWordByResourceId" resultType="string">
+        select word from resource_word where resource_id = #{resourceId}
+    </select>
+
+</mapper>

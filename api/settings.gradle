@@ -1,0 +1,5 @@
+rootProject.name = 'api'
+include 'dictionaryEnglish'
+include 'VocabJotDownAPI'
+include 'Common'
+include 'DataAccess'
