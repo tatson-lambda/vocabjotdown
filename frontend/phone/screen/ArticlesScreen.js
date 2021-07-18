@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, Text, StatusBar, TouchableOpacity, FlatList } from 'react-native';
-import Card from '../shared/card';
+import { Card} from 'react-native-elements'
+
 
 const DATA = [
   { id: 1, title: 'shit', content: 'This is a test content', },
@@ -34,7 +35,8 @@ export default class ArticleScreen extends React.Component {
     const renderItem = ({ item }) => (
       <TouchableOpacity>
         <Card>
-          <Text style={styles.titleText}>{item.title}</Text>
+          <Card.Title>{item.content}</Card.Title>
+          <Card.Divider/>
           <Text style={styles.contentText}>{item.content}</Text>
         </Card>
       </TouchableOpacity>
@@ -45,8 +47,9 @@ export default class ArticleScreen extends React.Component {
         <FlatList
             data={DATA}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
           />
+
       </SafeAreaView>
     );
   }

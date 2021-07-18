@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 
-const DELAY_SECOND = 2000;
+const DELAY_SECOND = 500;
 
 export default class SplashScreen extends React.Component {
   componentDidMount() {

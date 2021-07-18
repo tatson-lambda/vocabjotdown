@@ -1,18 +1,18 @@
-import React from 'react';
-import { StyleSheet, View, Text, StatusBar, SafeAreaView, Button, Alert } from 'react-native';
+import React, { Component } from 'react'
+import { ScrollView, Switch, StyleSheet, Text, View, SafeAreaView, Alert, StatusBar } from 'react-native'
 import { AlphabetList } from "react-native-section-alphabet-list";
 
 const data = [
-  { key: 1, value: 'shit', },
-  { key: 2, value: 'pee', },
-  { key: 3, value: 'pusy', },
-  { key: 4, value: 'earth', },
-  { key: 5, value: 'phone', },
-  { key: 6, value: 'pet', },
-  { key: 7, value: 'earsplitting', },
-  { key: 8, value: 'roomy', },
-  { key: 9, value: 'quaint', },
-  { key: 10, value: 'hose', },
+  { key: 1, value: 'shit', learnt: false },
+  { key: 2, value: 'pee', learnt: false },
+  { key: 3, value: 'pusy', learnt: false },
+  { key: 4, value: 'earth', learnt: true },
+  { key: 5, value: 'phone', learnt: true },
+  { key: 6, value: 'pet', learnt: false },
+  { key: 7, value: 'earsplitting', learnt: true },
+  { key: 8, value: 'roomy', learnt: false },
+  { key: 9, value: 'quaint', learnt: false },
+  { key: 10, value: 'hose', learnt: false },
 ];
 
 const styles = StyleSheet.create({
@@ -64,21 +64,12 @@ const styles = StyleSheet.create({
   wordHeader: {
     fontSize: 25,
     fontWeight: 'bold',
-  },
-
-  headerDiv: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     margin: 15
-  },
-  
+  }
 })
+export default class ResourceScreen extends Component {
 
-
-
-export default class VocabScreen extends React.Component {
-
-  addVocabulary() {
+  markLearnt() {
 
   }
 
@@ -86,14 +77,8 @@ export default class VocabScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.headerDiv}>
-          <Text style={styles.wordHeader} >10 words</Text>
-          <Button
-            onPress={() => Alert.alert('Simple Button pressed')}
-            title="Add"
-            color="#841584"
-            accessibilityLabel="Add vocabulary to this list"
-          />
+        <View>
+          <Text style={styles.wordHeader} >B2 word list (100 words) </Text>
         </View>
 
         <AlphabetList

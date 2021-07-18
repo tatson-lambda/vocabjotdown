@@ -29,12 +29,12 @@ To run
 npm start
 ```
 
-## Mobile (expo project)
+## Phone (expo project)
 
 To create
 
 ```
-cd mobile
+cd phone
 expo init
 ```
 
@@ -72,6 +72,9 @@ expo start
     a. https://material-ui.com/components/material-icons/
 2. Bootstrap
 3. https://icons8.com/icons/set/book
+4. https://github.com/software-mansion/react-native-gesture-handler
+5. https://www.npmjs.com/package/react-native-section-alphabet-list
+6. https://www.npmjs.com/package/react-native-restart
 
 ## Reference
 

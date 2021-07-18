@@ -1,11 +1,9 @@
 
 import React, { Component } from 'react'
-import { ScrollView, Switch, StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import { ScrollView, Switch, StyleSheet, Text, View, SafeAreaView, Linking, Alert} from 'react-native'
 import { Avatar, ListItem } from 'react-native-elements'
 import PropTypes from 'prop-types'
 
-import BaseIcon from '../shared/Icon'
-import Chevron from '../shared/Chevron'
 import InfoText from '../shared/InfoText'
 
 const styles = StyleSheet.create({
@@ -41,7 +39,17 @@ export default class ProfileScreen extends Component {
         email: PropTypes.string.isRequired,
       })
     ).isRequired,
-  }*/
+  }
+  
+
+  */
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerShown: false
+    };
+    
+  }
 
   state = {
     pushNotifications: true,
@@ -56,6 +64,41 @@ export default class ProfileScreen extends Component {
       pushNotifications: !state.pushNotifications,
     }))
   }
+
+  onPressCopyright = async () => {
+    var url = "https://www.google.com"
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${url}`);
+    }
+  }
+
+  onPressWebsite = async () => {
+    var url = "https://www.google.com"
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${url}`);
+    }
+  }
+
+  onPressSwitchLanguage = () => {
+
+  }
+
+  onPressChangeLevel = () => {
+    this.props.navigation.navigate('Resources')
+  }
+
+  onPressLogout = () => {
+
+  }
+
 
   render() {
     //const { avatar, name, emails: [firstEmail] } = this.props
@@ -89,7 +132,8 @@ export default class ProfileScreen extends Component {
           <InfoText text="Account" />
           <View>
             <ListItem 
-              onPress={() => this.onPressSetting()}>
+              onPress={() => this.onPressSwitchLanguage()}
+              onLongPress={() => this.onPressSwitchLanguage()}>
               <ListItem.Content>
                 <ListItem.Title>Switch Language</ListItem.Title>
                 <ListItem.Subtitle>English</ListItem.Subtitle>
@@ -97,7 +141,18 @@ export default class ProfileScreen extends Component {
             </ListItem>
 
             <ListItem 
-              onPress={() => this.onPressSetting()}>
+              onPress={() => this.onPressChangeLevel()}
+              onLongPress={() => this.onPressChangeLevel()}>
+              <ListItem.Content>
+                <ListItem.Title>Current level</ListItem.Title>
+                <ListItem.Subtitle>B2</ListItem.Subtitle>
+              </ListItem.Content>
+              <ListItem.Chevron />
+            </ListItem>
+
+            <ListItem 
+              onPress={() => this.onPressLogout()}
+              onLongPress ={() => this.onPressLogout()}>
               <ListItem.Content>
                 <ListItem.Title>Clear and Logout</ListItem.Title>
               </ListItem.Content>
@@ -106,14 +161,16 @@ export default class ProfileScreen extends Component {
           <InfoText text="More" />
           <View>
           <ListItem 
-              onPress={() => this.onPressSetting()}>
+              onPress={() => this.onPressWebsite()}
+              onLongPress ={() => this.onPressWebsite()}>
               <ListItem.Content>
                 <ListItem.Title>Website</ListItem.Title>
               </ListItem.Content>
             </ListItem>     
 
             <ListItem 
-              onPress={() => this.onPressSetting()}>
+              onPress={() => this.onPressCopyright() }
+              onLongPress ={() => this.onPressCopyright()}>
               <ListItem.Content>
                 <ListItem.Title>Copyright</ListItem.Title>
               </ListItem.Content>
