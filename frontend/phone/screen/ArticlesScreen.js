@@ -30,10 +30,19 @@ const styles = StyleSheet.create({
 })
 
 export default class ArticleScreen extends React.Component {
+
+  onPressChangeLevel = () => {
+    this.props.navigation.navigate('Article')
+  }
+
+  openArticle = () => {
+    this.props.navigation.navigate('Article')
+  }
+
   render() {
 
     const renderItem = ({ item }) => (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={this.openArticle}>
         <Card>
           <Card.Title>{item.content}</Card.Title>
           <Card.Divider/>

@@ -4,10 +4,15 @@ import { View, Image } from 'react-native';
 const DELAY_SECOND = 500;
 
 export default class SplashScreen extends React.Component {
+
+  constructor(){
+    super()
+  }
+
   componentDidMount() {
     // When mounted, wait one second, then navigate to App
     setTimeout(() => {
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('Login');
     }, DELAY_SECOND);
   }
 

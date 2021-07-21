@@ -6,6 +6,7 @@ import SplashScreen from './screen/SplashScreen';
 import { createAppContainer, createSwitchNavigator,  } from 'react-navigation'
 import MainScreen from './screen/MainScreen';
 import ArticlesScreen from './screen/ArticlesScreen';
+import ArticleScreen from './screen/ArticleScreen';
 import VocabScreen from './screen/VocabScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import LoginScreen from './screen/LoginScreen';
@@ -26,6 +27,22 @@ class App extends React.Component {
     );
   }
 }
+
+const ArticleStack = createStackNavigator(
+  {
+    Articles: ArticlesScreen,
+    Article: ArticleScreen,
+  },
+  {
+    initialRouteName: "Articles",
+    navigationOptions: {
+      headerTintColor: "#a41034",
+      headerStyle: {
+        backgroundColor: "#fff"
+      }
+    }
+  }
+)
 
 const ProfileStack = createStackNavigator(
   {
@@ -49,7 +66,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: MainScreen,
     Vocab: VocabScreen,
-    Article: ArticlesScreen,
+    Article: ArticleStack,
     Profile: ProfileStack,
   },
   {
