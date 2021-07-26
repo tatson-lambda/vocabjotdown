@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {FormControl, InputLabel, Input} from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
+import { Link as RouterLink } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const styles = (theme) => ({
     paper: {
@@ -38,7 +40,7 @@ class ResetPassword extends React.Component {
         return (
             <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <div className={classes.paper}>
+            <div >
                 <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
                 </Avatar>
@@ -70,4 +72,4 @@ class ResetPassword extends React.Component {
     }
 }
 
-export default ResetPassword;
+export default withRouter(withStyles(styles, { withTheme: true })(ResetPassword));

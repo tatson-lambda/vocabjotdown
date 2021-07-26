@@ -8,7 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { Link as RouterLink } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
 
 const styles = (theme) => ({
     paper: {
@@ -90,12 +92,12 @@ class Signup extends React.Component {
                 </Button>
                 <Grid container>
                     <Grid item xs>
-                    <Link href="#" variant="body2">
+                    <Link href="#" variant="body2" component={RouterLink} to="/resetpassword">
                         Forgot password?
                     </Link>
                     </Grid>
                     <Grid item>
-                    <Link href="#" variant="body2">
+                    <Link href="#" variant="body2" component={RouterLink} to="/login">
                         {"Have an account? Log in"}
                     </Link>
                     </Grid>
@@ -107,4 +109,4 @@ class Signup extends React.Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(Signup);
+export default withRouter(withStyles(styles, { withTheme: true })(Signup));

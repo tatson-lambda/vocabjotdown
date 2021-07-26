@@ -1,5 +1,5 @@
 import React from 'react';
-import {  StyleSheet, View, Text, StatusBar } from 'react-native';
+import {  StyleSheet, View, Text, StatusBar, TextInput } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,17 +38,15 @@ export default class ArticleScreen extends React.Component {
     }
 
     componentDidMount() {
-        loadArticle(0)
+        this.loadArticle(0)
     }
 
     render() {
       return (
         <View style={styles.container}>
-            <CheckBox
-                title='Highlight learning vocabulary'
-                checked={this.state.checked}
-                />
-            <Text>{this.state.content}</Text>
+            <TextInput multiline editable>
+                {this.state.content}
+            </TextInput>
             <StatusBar style="auto" />
         </View>
         );
