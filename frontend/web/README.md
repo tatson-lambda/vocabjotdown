@@ -68,3 +68,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Interesting link
+https://stackoverflow.com/questions/35884112/draftjs-how-to-initiate-an-editor-with-content
+https://www.gitmemory.com/issue/jpuri/react-draft-wysiwyg/551/504105851

@@ -37,7 +37,7 @@ class Vocabulary extends React.Component {
         const bull = <span className={classes.bullet}>•</span>;
 
         return (
-            <Container component="main" maxWidth="lg" >
+            <Container component="main" maxWidth="md" >
 
                 <Typography component="h3" variant="h5">
                     There are 100 vocabulary in my list

@@ -6,6 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import logo from '../logo.png'
 import './header.css';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -77,6 +78,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
 
+  const history = useHistory();
+
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -98,6 +101,7 @@ function Header() {
   const  handleSearchKeypress = (e) => {
     if(e.keyCode == 13){
       console.log('value', e.target.value);
+      history.push("/dictionary/" + e.target.value);
    }
   }
 
@@ -109,7 +113,7 @@ function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <ButtonBase>
+        <ButtonBase component={RouterLink} to="/">
         <img src={logo}  alt="logo" className="header-logo" />
         </ButtonBase> 
 
@@ -143,12 +147,12 @@ function Header() {
           Progress
         </Button>
 
-        <Button color="inherit" component={RouterLink} to="/articles">
-          Article
-        </Button>
-
         <Button color="inherit" component={RouterLink} to="/vocabulary">
           Vocabulary
+        </Button>
+
+        <Button color="inherit" component={RouterLink} to="/articles">
+          Article
         </Button>
 
         <Button color="inherit" component={RouterLink} to="/about">

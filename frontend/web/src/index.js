@@ -12,7 +12,6 @@ import Progress from "./component/progress";
 import Vocabulary from "./component/vocabulary";
 import Article from "./component/article";
 import Articles from "./component/articles";
-import NewArticle from "./component/newarticle";
 import Resources from "./component/resources";
 import ResourceDetail from "./component/resourcedetail";
 import Login from "./component/auth/login";
@@ -32,12 +31,11 @@ ReactDOM.render(
           <Header />
           <Switch>
             <Route exact path="/" component={App} />
-            <Route exact path="/dictionary" component={Dictionary} />
+            <Route exact path="/dictionary/:word" component={Dictionary} />
             <Route exact path="/progress" component={Progress} />
             <Route exact path="/vocabulary" component={Vocabulary} />
             <Route exact path="/articles" component={Articles} />
-            <Route exact path="/article" component={Article} />
-            <Route exact path="/newarticle" component={NewArticle} />
+            <Route exact path="/article/:id" component={Article} />
             <Route exact path="/resources" component={Resources} />
             <Route exact path="/resourcedetail" component={ResourceDetail} />
             <Route exact path="/login" component={Login} />

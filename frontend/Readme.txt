@@ -76,6 +76,13 @@ expo start
 5. https://www.npmjs.com/package/react-native-section-alphabet-list
 6. https://www.npmjs.com/package/react-native-restart
 
+## Editor
+https://www.npmjs.com/package/react-native-draftjs-editor   -> 54 0.02  2 years ago
+https://gist.github.com/scf4/012e9f615f6b43a1712a083b162afd94   -> maybe the original stuff is already useful
+
+## Expo
+https://stackoverflow.com/questions/63812903/how-to-give-typography-like-style-to-an-input-element-with-material-ui
+
 ## Reference
 
 1. https://www.digitalocean.com/community/tutorials/how-to-create-a-node-js-module
